@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2/promise');
-const fs = require('fs');
 const http = require('http');
 const { Server } = require('socket.io');
 
@@ -13,6 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// MySQL Database Configuration
 const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -34,32 +34,12 @@ async function connectToDatabase() {
         console.log('Connected to MySQL Database!');
     } catch (err) {
         console.error('Database connection failed:', err);
+        console.error('Please check your MySQL server is running and credentials are correct in server.js');
         process.exit(1);
     }
 }
 
-async function initializeDB() {
-    try {
-        const connection = await pool.getConnection();
-        const sqlPath = path.join(__dirname, 'init.sql');
-        const sql = fs.readFileSync(sqlPath, 'utf8');
-        await connection.query(sql);
-        console.log('Database initialized successfully!');
-        connection.release();
-    } catch (err) {
-        console.error('Error initializing database:', err.message);
-    }
-}
-
-connectToDatabase().then(async () => {
-    await initializeDB();
-
-    server.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
-        console.log(`Main page: http://localhost:${port}/`);
-        console.log(`Login page: http://localhost:${port}/login`);
-    });
-});
+connectToDatabase();
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
@@ -99,13 +79,19 @@ app.get('/api/courses/:studentId', async (req, res) => {
     }
 });
 
-const peers = {};
+const peers = {}; // A simple in-memory object to track connected peers
 const room = 'mainClassRoom';
 
 io.on('connection', (socket) => {
+    console.log(`A user connected: ${socket.id}`);
     socket.join(room);
+
+    // Announce a new user has joined the room
     socket.on('join', () => {
         peers[socket.id] = { id: socket.id };
+        console.log(`User ${socket.id} joined room: ${room}`);
+
+        // For each existing peer, send an 'offer' to the new peer
         for (const peerId in peers) {
             if (peerId !== socket.id) {
                 socket.emit('peer-joined', { peerId, isInitiator: false });
@@ -114,6 +100,7 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Handle WebRTC signals from peers
     socket.on('webrtc_signal', (data) => {
         const targetSocketId = data.target;
         if (peers[targetSocketId]) {
@@ -123,13 +110,24 @@ io.on('connection', (socket) => {
             });
         }
     });
-
+    
+    // Handle chat messages
     socket.on('chat message', (msg) => {
+        console.log(`Message from ${socket.id}: ${msg}`);
         io.to(room).emit('chat message', { senderId: socket.id, message: msg });
     });
 
     socket.on('disconnect', () => {
+        console.log(`User disconnected: ${socket.id}`);
         delete peers[socket.id];
         io.to(room).emit('peer-left', socket.id);
     });
 });
+
+server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Main page: http://localhost:${port}/`);
+    console.log(`Login page: http://localhost:${port}/login`);
+
+});
+
