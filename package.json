@@ -1,0 +1,27 @@
+{
+  "name": "online-academy-project",
+  "version": "1.0.0",
+  "description": "A responsive online academy platform with live class features.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "online-learning",
+    "e-learning",
+    "live-classes",
+    "web-development",
+    "frontend",
+    "backend",
+    "nodejs",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mssql": "^11.0.1",
+    "mysql2": "^3.14.1",
+    "socket.io": "^4.8.1"
+  }
+}

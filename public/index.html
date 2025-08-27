@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به آکادمی آنلاین</title>
+    <link rel="stylesheet" href="css/login-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>ورود دانشجو</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="studentCode">کد دانشجویی:</label>
+                    <input type="text" id="studentCode" placeholder="مثال: S1001" required>
+                </div>
+                <button type="submit">ورود</button>
+                <div id="message" class="message"></div>
+            </form>
+
+            <div id="studentCoursesSection" class="section-block student-courses-section" style="display:none;">
+                <div class="section-title">
+                    <h2>درس‌های اخذ شده</h2>
+                </div>
+                <div class="card-grid courses-grid" id="coursesGrid">
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/login-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #e0f2f7; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    direction: rtl;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px; 
+    text-align: center;
+}
+
+.login-box h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: right; 
+}
+
+.input-group label {
+    display: block;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; 
+}
+
+button {
+    background-color: #3498db; /* Blue */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.message.error {
+    background-color: #fdd;
+    color: #c00;
+    border: 1px solid #c00;
+}
+
+.message.success {
+    background-color: #dfd;
+    color: #0c0;
+    border: 1px solid #0c0;
+}
+
+/* New styles for course display in login page */
+.student-courses-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.student-courses-section .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.student-courses-section .section-title h2 {
+    margin: 0;
+    font-size: 1em; /* Adjust to fit within the section-title font size */
+}
+
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.course-item-card {
+    background-color: #f0f8ff; /* Light bluish background */
+    border: 1px solid #cceeff; /* Light blue border */
+    border-radius: 8px;
+    padding: 15px;
+    text-align: right;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-item-card h4 {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.course-item-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.course-item-card .class-link-btn {
+    display: inline-block; /* Make it behave like a button but is a link */
+    background-color: #28a745; /* Green */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.course-item-card .class-link-btn:hover {
+    background-color: #218838;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 25px;
+        margin: 20px;
+        max-width: 90%;
+    }
+    .login-box h2 {
+        font-size: 1.8rem;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    .courses-grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+    }
+    .login-box h2 {
+        font-size: 1.6rem;
+    }
+    .input-group label {
+        font-size: 1rem;
+    }
+    .input-group input[type="text"] {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    .section-title {
+        font-size: 1.2rem;
+    }
+    .course-item-card h4 {
+        font-size: 1.1rem;
+    }
+    .course-item-card p {
+        font-size: 0.9rem;
+    }
+    .course-item-card .class-link-btn {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+}

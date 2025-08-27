@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کلاس آنلاین من</title>
+    <link rel="stylesheet" href="css/live-class-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="class-header">
+        <h1>کلاس آنلاین من</h1>
+        <span>تاریخ: 25 خرداد 1403</span>
+    </header>
+
+    <div class="class-container">
+        <div class="main-class-content">
+            <div class="video-display-panel">
+                <video id="presenterVideo" autoplay playsinline muted></video>
+                <div id="statusMessage" class="stream-status-message">برای شروع کلاس، دوربین و میکروفون خود را فعال کنید.</div>
+            </div>
+            <div id="audioContainer"></div>
+            <div class="class-controls">
+                <button id="toggleCameraBtn" class="control-button primary">
+                    <span class="icon">&#128247;</span> روشن/خاموش کردن دوربین
+                </button>
+                <button id="toggleMicBtn" class="control-button primary">
+                    <span class="icon">&#127908;</span> روشن/خاموش کردن میکروفون
+                </button>
+                <button id="endCallBtn" class="control-button danger" style="display: none;">
+                    <span class="icon">&#10060;</span> پایان تماس
+                </button>
+            </div>
+        </div>
+
+        <div class="chat-panel">
+            <h2>چت کلاس</h2>
+            <div class="chat-messages-display" id="chatMessages">
+                <div class="chat-message"><strong>سیستم:</strong> به کلاس خوش آمدید!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." />
+                <button id="sendChatBtn">ارسال</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 1403 کلاس آنلاین نمونه. تمامی حقوق محفوظ است.
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/live-class-script.js"></script>
+</body>
+</html>
