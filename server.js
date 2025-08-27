@@ -7,7 +7,7 @@ const { Server } = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -127,4 +127,5 @@ server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
     console.log(`Main page: http://localhost:${port}/`);
     console.log(`Login page: http://localhost:${port}/login`);
+
 });
